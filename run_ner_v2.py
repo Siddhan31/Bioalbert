@@ -1299,7 +1299,7 @@ def main(_):
       "covid": CovidProcessor,
       "covid-2": Covid2Processor,
       "bc5cdr": BC5CDRProcessor,
-      "clefe": CLEFEProcessor,
+      
     }
   
 
