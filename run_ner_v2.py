@@ -579,11 +579,7 @@ class BC5CDRChemProcessor(DataProcessor):
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
     return examples
-    processors = 
-{
-        "bc5cdr": BC5CDRProcessor,
-        "clefe": CLEFEProcessor,
-    }
+    
 
 class BC5CDRDiseaseProcessor(DataProcessor):
   """Processor for the BC5CDR-disease data set (GLUE version)."""
@@ -1304,7 +1300,7 @@ def main(_):
       "covid": CovidProcessor,
       "covid-2": Covid2Processor,
       "bc5cdr": BC5CDRProcessor,
-      "clefe": CLEFEProcessor,
+      
     }
   
 
