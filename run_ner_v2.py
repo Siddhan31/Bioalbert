@@ -512,6 +512,33 @@ class BC4CHEMDProcessor(DataProcessor):
           InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
     return examples
 
+class BC5CDRProcessor(DataProcessor):
+    def get_train_examples(self, data_dir):
+        l1 = self._read_data(os.path.join(data_dir, "train.tsv"))
+        l2 = self._read_data(os.path.join(data_dir, "devel.tsv"))
+        return self._create_example(l1 + l2, "train")
+    def get_dev_examples(self, data_dir):
+        return self._create_example(
+            self._read_data(os.path.join(data_dir, "devel.tsv")), "dev"
+        )
+    def get_test_examples(self, data_dir):
+        return self._create_example(
+            self._read_data(os.path.join(data_dir, "test.tsv")), "test")
+    def get_labels(self):
+        return ["B", "I", "O", "X", "[CLS]", "[SEP]"]
+    def _create_example(self, lines, set_type):
+        examples = []
+        for (i, line) in enumerate(lines):
+            guid = "%s-%s" % (set_type, i)
+            text = tokenization.convert_to_unicode(line[1])
+            label = tokenization.convert_to_unicode(line[0])
+            examples.append(InputExample(guid=guid, text=text, label=label))
+        return examples
+processors = {
+        "bc5cdr": BC5CDRProcessor,
+        "clefe": CLEFEProcessor,
+    }
+
 class BC5CDRChemProcessor(DataProcessor):
   """Processor for the BC5CDR-chem data set (GLUE version)."""
 
