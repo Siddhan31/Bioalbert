@@ -534,10 +534,7 @@ class BC5CDRProcessor(DataProcessor):
             label = tokenization.convert_to_unicode(line[0])
             examples.append(InputExample(guid=guid, text=text, label=label))
         return examples
-processors = {
-        "bc5cdr": BC5CDRProcessor,
-        "clefe": CLEFEProcessor,
-    }
+
 
 class BC5CDRChemProcessor(DataProcessor):
   """Processor for the BC5CDR-chem data set (GLUE version)."""
@@ -1301,7 +1298,10 @@ def main(_):
       "s800": S800Processor,
       "covid": CovidProcessor,
       "covid-2": Covid2Processor,
-  }
+      "bc5cdr": BC5CDRProcessor,
+      "clefe": CLEFEProcessor,
+    }
+  
 
   if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
     raise ValueError(
